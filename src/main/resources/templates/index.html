@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Selector</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="title">
+    <h1>Groceries Shop</h1>
+</div>
+<div class="container">
+    <div class="products">
+        <h2>Products</h2>
+        <ul id="product-list">
+            <!-- Product list items generated dynamically -->
+        </ul>
+    </div>
+    <div class="selected">
+        <h2>Selected Products</h2>
+        <div id="selected-products">
+            <!-- Selected products will be displayed here -->
+        </div>
+        <div id="total-price"></div>
+    </div>
+</div>
+
+<div class="button-container">
+    <div class="button-div">
+        <button id="add-btn">Add Product</button>
+    </div>
+    <div class="button-div">
+        <button id="calculate-btn">Calculate Total</button>
+    </div>
+</div>
+
+<!-- Modal for updating product -->
+<div class="modal fade" id="updateProductModal" tabindex="-1" aria-labelledby="updateProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateProductModalLabel">Update Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="updateProductForm">
+                    <div class="invalid-feedback" id="updateProductError"></div>
+                    <div class="mb-3">
+                        <label for="productName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="productName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Price (eur)</label>
+                        <input type="number" class="form-control" id="productPrice" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="updateProductButton">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
