@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const updateButton = document.getElementById('updateProductButton');
     const createButton = document.getElementById('createProductButton');
     const modalTitle = document.getElementById('modalLabel');
+    const errorContainer = document.getElementById('errors');
 
     let currentProductId;
 
@@ -70,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function openUpdateModal(id, name, price) {
         modalTitle.textContent = 'Update Product';
+        errorContainer.innerHTML = '';
 
         currentProductId = id;
         document.getElementById('productName').value = name;
@@ -82,6 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     openCreateModalButton.addEventListener('click', function() {
         modalTitle.textContent = 'Create Product';
+        errorContainer.innerHTML = '';
 
         document.getElementById('productName').value = '';
         document.getElementById('productPrice').value = '';
@@ -97,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const productPrice = document.getElementById('productPrice').value;
 
         try {
-            const response = await fetch(`http://localhost:8080/products/edit/${currentProductId}`, {
+            const response = await fetch(`http://localhost:8080/products/edit`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -154,16 +157,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function displayErrors(errors) {
-        const errorContainer = document.getElementById('errors');
         errorContainer.innerHTML = '';
 
         if (errors.length > 0) {
             const errorMessages = errors.join(' ');
             errorContainer.textContent = errorMessages;
-        } else {
-            errorContainer.textContent = 'An unknown error occurred.';
         }
-
         errorContainer.style.display = 'block';
     }
 
@@ -202,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(data => {
                 console.log("Total price:", data);
-                totalPriceContainer.textContent = `Total Price: ${data} eur`;
+                totalPriceContainer.textContent = `Total Price: ${data} aws`;
             })
             .catch(error => {
                 console.error('Error calculating total price:', error);

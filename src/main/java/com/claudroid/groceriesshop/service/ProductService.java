@@ -35,8 +35,8 @@ public class ProductService {
         productRepository.delete(findProductById(id));
     }
 
-    public ProductDto updateProduct(Long id, ProductDto productDto) {
-        ProductEntity productEntity = findProductById(id);
+    public ProductDto updateProduct(ProductDto productDto) {
+        ProductEntity productEntity = findProductById(productDto.getId());
         productEntity.setName(productDto.getName());
         productEntity.setPrice(productDto.getPrice());
 

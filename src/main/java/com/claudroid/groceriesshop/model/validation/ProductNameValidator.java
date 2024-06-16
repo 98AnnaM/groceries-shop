@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.Optional;
 
 public class ProductNameValidator implements ConstraintValidator<ValidProductName, ProductDto> {
 
@@ -29,24 +30,27 @@ public class ProductNameValidator implements ConstraintValidator<ValidProductNam
         Long id = productDto.getId();
         String name = productDto.getName();
 
+        boolean isNotValid = false;
+
         if (id == null) {
-            return !productRepository.existsByName(name);
+            isNotValid = productRepository.existsByName(name);
+        } else {
+            Optional<ProductEntity> productEntityOpt = productRepository.findById(id);
+            if (productEntityOpt.isPresent()) {
+                ProductEntity productEntity = productEntityOpt.get();
+                isNotValid = !name.equals(productEntity.getName()) && productRepository.existsByName(name);
+            } else {
+                isNotValid = productRepository.existsByName(name);
+            }
         }
 
-        ProductEntity productEntity = productRepository.findById(id).orElse(null);
-        if (productEntity == null) {
-            return !productRepository.existsByName(name);
-        }
-
-        boolean notValid = !name.equals(productEntity.getName()) && productRepository.existsByName(name);
-
-        if (notValid) {
+        if (isNotValid) {
             context.buildConstraintViolationWithTemplate("This product name is occupied.")
                     .addPropertyNode("name")
                     .addConstraintViolation()
                     .disableDefaultConstraintViolation();
         }
 
-        return !notValid;
+        return !isNotValid;
     }
-}
+    }
