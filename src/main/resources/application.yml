@@ -1,29 +1,18 @@
 spring:
+  application:
+    name: groceries-shop
+
+  datasource:
+    username: postgres
+    password: postgres
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/groceries-shop-db}
+
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
-        format_sql: 'TRUE'
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: create-drop
-    open-in-view: 'false'
+      ddl-auto: create
+
   mvc:
     hiddenmethod:
       filter:
-        enabled: 'true'
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    password: 0000
-    username: root
-    url: jdbc:mysql://localhost:3306/groceriesShop?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
-logging:
-  level:
-    org:
-      hibernate:
-        type:
-          descriptor: TRACE
-        SQL: DEBUG
-      nodeValue: WARN
-    blog: WARN
-server:
-  port: 8080
+        enabled: true
