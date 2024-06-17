@@ -1,13 +1,10 @@
 package com.claudroid.groceriesshop.controller;
 
 import com.claudroid.groceriesshop.model.dto.ProductDto;
-import com.claudroid.groceriesshop.model.entity.ProductEntity;
-import com.claudroid.groceriesshop.model.validation.ApiError;
+import com.claudroid.groceriesshop.validation.ApiError;
 import com.claudroid.groceriesshop.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 

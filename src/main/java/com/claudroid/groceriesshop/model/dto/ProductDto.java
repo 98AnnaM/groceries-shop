@@ -1,6 +1,6 @@
 package com.claudroid.groceriesshop.model.dto;
 
-import com.claudroid.groceriesshop.model.validation.ValidProductName;
+import com.claudroid.groceriesshop.validation.ValidProductName;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;

@@ -1,14 +1,11 @@
-package com.claudroid.groceriesshop.model.validation;
+package com.claudroid.groceriesshop.validation;
 
 import javax.validation.ConstraintValidator;
 
 import com.claudroid.groceriesshop.model.dto.ProductDto;
 import com.claudroid.groceriesshop.model.entity.ProductEntity;
 import com.claudroid.groceriesshop.repository.ProductRepository;
-import com.claudroid.groceriesshop.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package com.claudroid.groceriesshop.model.validation;
+package com.claudroid.groceriesshop.validation;
 
 import org.springframework.http.HttpStatus;
 

@@ -1,6 +1,5 @@
-package com.claudroid.groceriesshop.model.validation;
+package com.claudroid.groceriesshop.validation;
 
-import javax.validation.Constraint;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.ElementType;
