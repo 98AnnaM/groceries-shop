@@ -1,5 +1,6 @@
 package com.claudroid.groceriesshop.controller;
 
+import com.claudroid.groceriesshop.service.PriceService;
 import com.claudroid.groceriesshop.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,13 +13,15 @@ import java.util.List;
 public class PriceController {
 
     private final ProductService productService;
+    private final PriceService priceService;
 
-    public PriceController(ProductService productService) {
+    public PriceController(ProductService productService, PriceService priceService) {
         this.productService = productService;
+        this.priceService = priceService;
     }
 
     @PostMapping("/price")
     public Double getTotalPrice(@RequestBody List<String> productNames) {
-        return productService.getTotalPrice(productNames);
+        return priceService.getTotalPrice(productNames);
     }
 }

@@ -12,4 +12,10 @@ import java.util.List;
 public interface PromotionRepository extends JpaRepository<PromotionEntity, Long> {
 
     List<PromotionEntity> findAllByPromotionName(PromotionNameEnum promotionName);
+
+    void deleteAllByPromotionName(PromotionNameEnum promotionName);
+
+     boolean existsByPromotionNameAndProduct_id(PromotionNameEnum promotionName, Long product_id);
+
+     boolean existsByProduct_id(Long product_id);
 }

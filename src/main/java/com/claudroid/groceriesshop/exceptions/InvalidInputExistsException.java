@@ -1,10 +1,10 @@
 package com.claudroid.groceriesshop.exceptions;
 
-public class ProductNameExistsException extends RuntimeException  {
+public class InvalidInputExistsException extends RuntimeException  {
 
     private String message;
 
-    public ProductNameExistsException(String message) {
+    public InvalidInputExistsException(String message) {
         this.message = message;
     }
 

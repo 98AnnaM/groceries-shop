@@ -1,6 +1,8 @@
 package com.claudroid.groceriesshop.controller;
 
+import com.claudroid.groceriesshop.exceptions.InvalidInputExistsException;
 import com.claudroid.groceriesshop.model.dto.ProductDto;
+import com.claudroid.groceriesshop.service.PromotionService;
 import com.claudroid.groceriesshop.validation.ApiError;
 import com.claudroid.groceriesshop.service.ProductService;
 import org.springframework.http.HttpStatus;
@@ -12,45 +14,40 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/products")
 public class ProductController {
 
     private final ProductService productService;
+    private final PromotionService promotionService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, PromotionService promotionService) {
         this.productService = productService;
+        this.promotionService = promotionService;
     }
 
-    @GetMapping("/products")
+    @GetMapping()
     public List<ProductDto> getAllProducts() {
         return productService.getAllProducts();
     }
 
-    @PostMapping("/products/add")
-    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/add")
     public ResponseEntity<ProductDto> createProduct (@RequestBody @Valid ProductDto productDto) {
         ProductDto createdProduct = productService.createProduct(productDto);
         return ResponseEntity.ok(createdProduct);
     }
 
-    @PutMapping("/products/edit")
+    @PutMapping("/edit")
     public ResponseEntity<ProductDto> updateProduct(@RequestBody @Valid ProductDto productDto){
         ProductDto updatedProduct = productService.updateProduct(productDto);
         return ResponseEntity.ok(updatedProduct);
     }
 
-    @DeleteMapping("/products/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteDoctor(@PathVariable Long id) {
+        if (promotionService.productIsInAnyPromotion(id)){
+            throw new InvalidInputExistsException("Product can not be deleted, because it is in promotion");
+        }
         productService.deleteProduct(id);
-    }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ApiError> onValidationFailure(MethodArgumentNotValidException exc) {
-
-        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
-        exc.getFieldErrors().forEach(fe -> apiError.addFieldWithError(fe.getDefaultMessage()));
-
-        return ResponseEntity.badRequest().body(apiError);
     }
 }

@@ -37,11 +37,11 @@ public class PromotionEntity {
         return this;
     }
 
-    public List<ProductEntity> getProduct() {
+    public List<ProductEntity> getProducts() {
         return product;
     }
 
-    public PromotionEntity setProduct(List<ProductEntity> product) {
+    public PromotionEntity setProducts(List<ProductEntity> product) {
         this.product = product;
         return this;
     }

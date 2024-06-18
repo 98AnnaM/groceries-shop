@@ -1,7 +1,6 @@
 package com.claudroid.groceriesshop.service;
 
 import com.claudroid.groceriesshop.exceptions.EntityNotFoundException;
-import com.claudroid.groceriesshop.exceptions.ProductNameExistsException;
 import com.claudroid.groceriesshop.model.dto.ProductDto;
 import com.claudroid.groceriesshop.model.entity.ProductEntity;
 import com.claudroid.groceriesshop.repository.ProductRepository;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,12 +43,16 @@ public class ProductService {
         return map(productRepository.save(productEntity));
     }
 
-    public Double getTotalPrice(List<String> productNames) {
-        return productNames.stream()
-                .map(productRepository::findByName)
-                .map(ProductEntity::getPrice)
-                .mapToDouble(Double::doubleValue)
-                .sum();
+    public boolean productExistByName(String name) {
+        return productRepository.existsByName(name);
+    }
+
+    public ProductEntity getByName(String name){
+            Optional<ProductEntity> productEntity = productRepository.findByName(name);
+            if(!productEntity.isPresent()){
+                throw new EntityNotFoundException("Product with name = " + name + " not found");
+            }
+        return productEntity.get();
     }
 
     private ProductDto map(ProductEntity productEntity){
