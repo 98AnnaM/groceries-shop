@@ -14,14 +14,14 @@ body {
     text-align: center;
 }
 
-.container {
+.container, #promotion {
     display: flex;
     justify-content: space-between;
     max-width: 800px;
     margin: 0 auto;
 }
 
-.products, .selected {
+.products, .selected, #twoForThree, #oneAndHalf {
     background-color: lightgreen;
     width: 45%;
     border: 4px solid darkgreen;

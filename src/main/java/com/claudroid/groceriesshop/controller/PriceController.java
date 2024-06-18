@@ -21,7 +21,7 @@ public class PriceController {
     }
 
     @PostMapping("/price")
-    public Double getTotalPrice(@RequestBody List<String> productNames) {
+    public String getTotalPrice(@RequestBody List<String> productNames) {
         return priceService.getTotalPrice(productNames);
     }
 }

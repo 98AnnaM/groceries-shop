@@ -19,7 +19,7 @@ public class PriceService {
         this.promotionService = promotionService;
     }
 
-    public Double getTotalPrice(List<String> productNames) {
+    public String getTotalPrice(List<String> productNames) {
         Double priceWithoutPromotion = productNames.stream()
                 .map(productService::getByName)
                 .map(ProductEntity::getPrice)

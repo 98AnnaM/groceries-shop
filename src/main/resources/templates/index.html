@@ -11,6 +11,20 @@
 <div id="title">
     <h1>Groceries Shop</h1>
 </div>
+<div id="promotion">
+    <div id="oneAndHalf">
+        <h5>Buy Two Pay One And Half</h5>
+        <span id="oneAndHalfProducts"></span>
+        <button id="add-promotion">Add Promotion</button>
+
+    </div>
+    <div id="twoForThree">
+        <h5>Two For Three promotion</h5>
+        <span id="twoForThreeProducts"></span>
+        <button id="create-promotion">Add Promotion</button>
+
+    </div>
+</div>
 <div class="container">
     <div class="products">
         <h2>Products</h2>
@@ -66,7 +80,33 @@
     </div>
 </div>
 
+<!-- Modal for entering promotion products -->
+<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productModalLabel">Enter Products</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="productModalError" class="alert alert-danger d-none" role="alert"></div>
+                <form id="productForm">
+                    <div class="mb-3">
+                        <label for="productNames" class="form-label">Product Names (comma-separated)</label>
+                        <input type="text" class="form-control" id="productNames" name="productNames" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveProductsBtn">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="/js/script.js"></script>
+<script src="/js/promotions.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
