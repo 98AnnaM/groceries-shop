@@ -1,7 +1,6 @@
 package com.claudroid.groceriesshop.service;
 
 import com.claudroid.groceriesshop.model.entity.ProductEntity;
-import com.claudroid.groceriesshop.model.entity.PromotionEntity;
 import com.claudroid.groceriesshop.model.enums.PromotionNameEnum;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +34,7 @@ public class PriceService {
     private Double applyPromotionBuyOneGetOneHalf(List<String> productNames){
         List<String> productsOnPromotion = productNames.stream()
                 .filter(productName ->
-                        promotionService.productIsInPromotion(PromotionNameEnum.BUYONEGETONEHALF, productName))
+                        promotionService.productIsInPromotion(PromotionNameEnum.BUY_ONE_GET_ONE_HALF, productName))
                 .collect(Collectors.toList());
 
         double decreasePrice = 0;
@@ -48,7 +47,7 @@ public class PriceService {
     private Double applyTwoForThree(List<String> productNames){
         List<ProductEntity> productsOnPromotion = productNames.stream()
                 .filter(productName ->
-                        promotionService.productIsInPromotion(PromotionNameEnum.TWOFORTHREE, productName))
+                        promotionService.productIsInPromotion(PromotionNameEnum.TWO_FOR_THREE, productName))
                 .map(productService::getByName)
                 .collect(Collectors.toList());
 

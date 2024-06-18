@@ -3,11 +3,9 @@ package com.claudroid.groceriesshop.controller;
 import com.claudroid.groceriesshop.exceptions.InvalidInputExistsException;
 import com.claudroid.groceriesshop.model.dto.ProductDto;
 import com.claudroid.groceriesshop.service.PromotionService;
-import com.claudroid.groceriesshop.validation.ApiError;
 import com.claudroid.groceriesshop.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -44,7 +42,7 @@ public class ProductController {
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteDoctor(@PathVariable Long id) {
+    public void deleteProduct(@PathVariable Long id) {
         if (promotionService.productIsInAnyPromotion(id)){
             throw new InvalidInputExistsException("Product can not be deleted, because it is in promotion");
         }

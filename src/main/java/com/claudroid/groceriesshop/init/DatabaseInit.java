@@ -24,7 +24,6 @@ public class DatabaseInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        // Initialization logic here
     }
 
     @EventListener(ApplicationReadyEvent.class)

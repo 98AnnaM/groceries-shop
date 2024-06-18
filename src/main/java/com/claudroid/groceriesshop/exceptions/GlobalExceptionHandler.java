@@ -1,7 +1,5 @@
-package com.claudroid.groceriesshop.controller;
+package com.claudroid.groceriesshop.exceptions;
 
-import com.claudroid.groceriesshop.exceptions.EntityNotFoundException;
-import com.claudroid.groceriesshop.exceptions.InvalidInputExistsException;
 import com.claudroid.groceriesshop.validation.ApiError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

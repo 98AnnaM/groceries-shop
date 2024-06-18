@@ -1,7 +1,6 @@
 package com.claudroid.groceriesshop.controller;
 
 import com.claudroid.groceriesshop.exceptions.InvalidInputExistsException;
-import com.claudroid.groceriesshop.model.dto.ProductDto;
 import com.claudroid.groceriesshop.model.dto.PromotionDto;
 import com.claudroid.groceriesshop.model.enums.PromotionNameEnum;
 import com.claudroid.groceriesshop.service.ProductService;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/promotions")
@@ -28,12 +26,12 @@ public class PromotionController {
 
     @GetMapping("/2for3")
     public ResponseEntity<PromotionDto> getTwoForThree() {
-        return ResponseEntity.ok(promotionService.getPromotion(PromotionNameEnum.TWOFORTHREE));
+        return ResponseEntity.ok(promotionService.getPromotion(PromotionNameEnum.TWO_FOR_THREE));
     }
 
     @GetMapping("/buy1get1half")
     public ResponseEntity<PromotionDto> buyOneGetOneHalf() {
-        return ResponseEntity.ok(promotionService.getPromotion(PromotionNameEnum.BUYONEGETONEHALF));
+        return ResponseEntity.ok(promotionService.getPromotion(PromotionNameEnum.BUY_ONE_GET_ONE_HALF));
     }
 
     @PostMapping("/2for3")
@@ -43,9 +41,9 @@ public class PromotionController {
             throw new InvalidInputExistsException("Three different product must be added");
         }
         validateProductsExist(promotionDto);
-        validationProductsAreNotIncludedInAnotherPromotion(promotionDto, PromotionNameEnum.BUYONEGETONEHALF);
+        validationProductsAreNotIncludedInAnotherPromotion(promotionDto, PromotionNameEnum.BUY_ONE_GET_ONE_HALF);
 
-        promotionService.setPromotion(PromotionNameEnum.TWOFORTHREE, promotionDto);
+        promotionService.setPromotion(PromotionNameEnum.TWO_FOR_THREE, promotionDto);
         return ResponseEntity.ok(promotionDto);
     }
 
@@ -55,9 +53,9 @@ public class PromotionController {
             throw new InvalidInputExistsException("One product must be added");
         }
         validateProductsExist(promotionDto);
-        validationProductsAreNotIncludedInAnotherPromotion(promotionDto, PromotionNameEnum.TWOFORTHREE);
+        validationProductsAreNotIncludedInAnotherPromotion(promotionDto, PromotionNameEnum.TWO_FOR_THREE);
 
-        promotionService.setPromotion(PromotionNameEnum.BUYONEGETONEHALF, promotionDto);
+        promotionService.setPromotion(PromotionNameEnum.BUY_ONE_GET_ONE_HALF, promotionDto);
         return ResponseEntity.ok(promotionDto);
     }
 
