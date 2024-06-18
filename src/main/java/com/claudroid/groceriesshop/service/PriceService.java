@@ -5,6 +5,7 @@ import com.claudroid.groceriesshop.model.entity.PromotionEntity;
 import com.claudroid.groceriesshop.model.enums.PromotionNameEnum;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +20,7 @@ public class PriceService {
         this.promotionService = promotionService;
     }
 
-    public String getTotalPrice(List<String> productNames) {
+    public  Double getTotalPrice(List<String> productNames) {
         Double priceWithoutPromotion = productNames.stream()
                 .map(productService::getByName)
                 .map(ProductEntity::getPrice)
@@ -27,7 +28,8 @@ public class PriceService {
                 .sum();
 
         Double endPrice = priceWithoutPromotion - applyPromotionBuyOneGetOneHalf(productNames) - applyTwoForThree(productNames);
-        return endPrice;
+        DecimalFormat df = new DecimalFormat("#.00");
+        return Double.valueOf(df.format(endPrice));
     }
 
     private Double applyPromotionBuyOneGetOneHalf(List<String> productNames){
