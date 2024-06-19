@@ -17,8 +17,9 @@ public class ProductEntity {
         return id;
     }
 
-    public void setId(Long id) {
+    public ProductEntity setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
